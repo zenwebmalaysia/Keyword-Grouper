@@ -1,0 +1,491 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Keyword Grouper for Google Ads &amp; SEO (English + Malay) – Free Tool by ZenWeb</title>
+<meta name="description" content="Free keyword grouping tool. Paste a keyword list or Google Keyword Planner export and get ad groups and SEO topic clusters, search intent labels and negative keyword ideas – with English and Bahasa Malaysia support.">
+<link rel="canonical" href="https://zenwebmalaysia.github.io/keyword-grouper/">
+<meta property="og:title" content="Keyword Grouper for Google Ads & SEO – Free Tool by ZenWeb">
+<meta property="og:description" content="Turn a long keyword list into tidy ad groups and SEO topics, with intent labels and negative keyword ideas.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://zenwebmalaysia.github.io/keyword-grouper/">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebApplication",
+      "name": "Keyword Grouper",
+      "url": "https://zenwebmalaysia.github.io/keyword-grouper/",
+      "applicationCategory": "BusinessApplication",
+      "operatingSystem": "Any",
+      "description": "Free tool that groups a keyword list into Google Ads ad groups and SEO topic clusters, labels search intent, and suggests negative keywords, with support for English and Bahasa Malaysia keywords.",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "MYR" },
+      "creator": { "@id": "https://zenweb.my/#organization" }
+    },
+    {
+      "@type": "Organization",
+      "@id": "https://zenweb.my/#organization",
+      "name": "ZenWeb",
+      "legalName": "PNH Malaysia Sdn Bhd",
+      "url": "https://zenweb.my/",
+      "description": "Digital marketing agency in Petaling Jaya, Malaysia offering SEO, Google Ads, Meta Ads, web design and web development.",
+      "address": { "@type": "PostalAddress", "addressLocality": "Petaling Jaya", "addressRegion": "Selangor", "addressCountry": "MY" }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Why group keywords?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Grouped keywords let each Google Ads ad group show an ad that matches the search closely, which improves click-through rate and Quality Score. For SEO, each group usually becomes one page, so pages do not compete with each other." }
+        },
+        {
+          "@type": "Question",
+          "name": "What are negative keywords?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Negative keywords stop your ads showing for searches you do not want, such as 'free', 'jobs' or 'DIY'. Adding them early saves budget on clicks that will never become customers." }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I use a Google Keyword Planner export?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Yes. Paste the keyword and average monthly searches columns, separated by a tab or comma. The tool adds up search volume for each group." }
+        }
+      ]
+    }
+  ]
+}
+</script>
+<style>
+:root {
+  --bg: #f6f7f9;
+  --card: #ffffff;
+  --text: #16181d;
+  --muted: #5b6270;
+  --line: #e3e6eb;
+  --accent: #c1192d;
+  --accent-soft: #fbe9eb;
+  --good: #137a3a;
+  --good-soft: #e5f4ea;
+  --bad: #b42318;
+  --bad-soft: #fdecea;
+  --input: #ffffff;
+  --radius: 14px;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #111317;
+    --card: #1a1d23;
+    --text: #eceef2;
+    --muted: #a3a9b5;
+    --line: #2c3038;
+    --accent: #ff5a6a;
+    --accent-soft: #3a1c21;
+    --good: #5fd18a;
+    --good-soft: #17301f;
+    --bad: #ff8a80;
+    --bad-soft: #3a1d1b;
+    --input: #121419;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #111317; --card: #1a1d23; --text: #eceef2; --muted: #a3a9b5; --line: #2c3038;
+  --accent: #ff5a6a; --accent-soft: #3a1c21; --good: #5fd18a; --good-soft: #17301f;
+  --bad: #ff8a80; --bad-soft: #3a1d1b; --input: #121419;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font: 16px/1.6 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+a { color: var(--accent); }
+.wrap { max-width: 1080px; margin: 0 auto; padding: 32px 16px 64px; }
+header h1 { font-size: clamp(28px, 4vw, 40px); line-height: 1.15; margin: 0 0 10px; letter-spacing: -0.02em; }
+header p { color: var(--muted); margin: 0; max-width: 680px; }
+.eyebrow { font-size: 13px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--accent); margin-bottom: 8px; }
+.grid { display: grid; grid-template-columns: minmax(0, 380px) minmax(0, 1fr); gap: 20px; margin-top: 28px; align-items: start; }
+@media (max-width: 860px) { .grid { grid-template-columns: minmax(0, 1fr); } }
+.card { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 22px; }
+.card h2 { font-size: 18px; margin: 0 0 14px; }
+.tabs { display: flex; gap: 6px; background: var(--bg); border: 1px solid var(--line); border-radius: 10px; padding: 4px; margin-bottom: 18px; }
+.tabs button {
+  flex: 1; border: 0; background: transparent; color: var(--muted); font: inherit; font-size: 14px; font-weight: 600;
+  padding: 8px 10px; border-radius: 7px; cursor: pointer;
+}
+.tabs button[aria-selected="true"] { background: var(--card); color: var(--text); box-shadow: 0 1px 2px rgba(0,0,0,.08); }
+.field { margin-bottom: 14px; }
+.field label { display: block; font-size: 14px; font-weight: 600; margin-bottom: 5px; }
+.field .hint { display: block; font-size: 12.5px; color: var(--muted); font-weight: 400; margin-top: 3px; }
+.inputbox { display: flex; align-items: center; border: 1px solid var(--line); border-radius: 9px; background: var(--input); overflow: hidden; }
+.inputbox:focus-within { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft); }
+.inputbox span { padding: 0 10px; color: var(--muted); font-size: 14px; white-space: nowrap; }
+.inputbox input { flex: 1; min-width: 0; border: 0; background: transparent; color: var(--text); font: inherit; padding: 9px 10px; outline: none; }
+.inputbox span:first-child { padding-right: 0; }
+.inputbox span:last-child { padding-left: 0; }
+.presets { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 16px; }
+.presets button {
+  border: 1px solid var(--line); background: var(--card); color: var(--text); border-radius: 999px;
+  font: inherit; font-size: 13px; padding: 5px 12px; cursor: pointer;
+}
+.presets button:hover { border-color: var(--accent); }
+.small { font-size: 12.5px; color: var(--muted); }
+.verdict { border-radius: 12px; padding: 14px 16px; margin-bottom: 16px; font-weight: 600; }
+.verdict.good { background: var(--good-soft); color: var(--good); }
+.verdict.bad { background: var(--bad-soft); color: var(--bad); }
+.verdict.neutral { background: var(--bg); color: var(--muted); }
+.verdict small { display: block; font-weight: 400; color: var(--text); margin-top: 4px; }
+.stats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+@media (max-width: 520px) { .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.stat { border: 1px solid var(--line); border-radius: 10px; padding: 12px; }
+.stat .k { font-size: 12.5px; color: var(--muted); }
+.stat .v { font-size: 22px; font-weight: 700; letter-spacing: -0.01em; font-variant-numeric: tabular-nums; }
+.stat.hl { border-color: var(--accent); background: var(--accent-soft); }
+.funnel { margin: 18px 0 4px; }
+.frow { display: grid; grid-template-columns: 110px minmax(0, 1fr) 90px; gap: 10px; align-items: center; margin-bottom: 6px; font-size: 14px; }
+.frow .bar { height: 22px; background: var(--bg); border-radius: 6px; overflow: hidden; }
+.frow .bar i { display: block; height: 100%; background: var(--accent); border-radius: 6px; min-width: 2px; }
+.frow b { text-align: right; font-variant-numeric: tabular-nums; }
+table { width: 100%; border-collapse: collapse; font-size: 14px; font-variant-numeric: tabular-nums; }
+th, td { text-align: right; padding: 8px 6px; border-bottom: 1px solid var(--line); }
+th:first-child, td:first-child { text-align: left; }
+th { font-size: 12.5px; color: var(--muted); font-weight: 600; }
+tr.current td { font-weight: 700; background: var(--accent-soft); }
+.tablewrap { overflow-x: auto; }
+.actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+.btn {
+  border: 1px solid var(--accent); background: var(--accent); color: #fff; font: inherit; font-size: 14px; font-weight: 600;
+  padding: 9px 16px; border-radius: 9px; cursor: pointer;
+}
+.btn.secondary { background: transparent; color: var(--accent); }
+.content { margin-top: 40px; display: grid; gap: 20px; }
+.content h2 { font-size: 22px; margin: 0 0 8px; }
+.content h3 { font-size: 17px; margin: 18px 0 4px; }
+.content p, .content li { color: var(--text); }
+code { background: var(--bg); border: 1px solid var(--line); border-radius: 5px; padding: 1px 5px; font-size: 13.5px; }
+.cta { background: var(--accent); color: #fff; border-radius: var(--radius); padding: 26px; }
+.cta h2 { color: #fff; }
+.cta p { color: #fff; opacity: .92; }
+.cta a.btn { display: inline-block; background: #fff; color: #c1192d; border-color: #fff; text-decoration: none; }
+footer { margin-top: 36px; font-size: 13.5px; color: var(--muted); text-align: center; }
+.visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+.grid { grid-template-columns: minmax(0, 380px) minmax(0, 1fr); }
+@media (max-width: 860px) { .grid { grid-template-columns: minmax(0, 1fr); } }
+textarea {
+  width: 100%; border: 1px solid var(--line); border-radius: 9px; background: var(--input); color: var(--text);
+  font: 13.5px/1.5 ui-monospace, SFMono-Regular, Menlo, monospace; padding: 9px 10px; resize: vertical; outline: none;
+}
+textarea:focus { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft); }
+.check { display: flex; gap: 8px; align-items: center; font-size: 14px; margin: 4px 0; }
+.check input { accent-color: var(--accent); }
+.summary { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; margin-bottom: 16px; }
+.grp { border: 1px solid var(--line); border-radius: 10px; margin-bottom: 10px; overflow: hidden; }
+.grp summary { display: flex; justify-content: space-between; gap: 10px; align-items: center; padding: 10px 12px; cursor: pointer; list-style: none; }
+.grp summary::-webkit-details-marker { display: none; }
+.grp summary b { font-size: 15px; }
+.grp summary span { font-size: 12.5px; color: var(--muted); white-space: nowrap; }
+.grp ul { margin: 0; padding: 4px 12px 10px; list-style: none; border-top: 1px solid var(--line); }
+.grp li { display: flex; justify-content: space-between; gap: 10px; font-size: 13.5px; padding: 4px 0; border-bottom: 1px dashed var(--line); }
+.grp li:last-child { border-bottom: 0; }
+.grp li em { font-style: normal; color: var(--muted); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.tag { display: inline-block; font-size: 11px; font-weight: 700; padding: 1px 7px; border-radius: 99px; margin-left: 6px; vertical-align: 1px; }
+.tag.buy { background: var(--good-soft); color: var(--good); }
+.tag.price { background: #fff4d6; color: #8a5a00; }
+.tag.local { background: #e7efff; color: #2453b3; }
+.tag.info { background: var(--bg); color: var(--muted); border: 1px solid var(--line); }
+.tag.neg { background: var(--bad-soft); color: var(--bad); }
+.negs { display: flex; flex-wrap: wrap; gap: 6px; }
+.negs code { font-size: 13px; }
+.block { margin-top: 22px; padding-top: 18px; border-top: 1px solid var(--line); }
+.block h3 { font-size: 15px; margin: 0 0 8px; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .tag.local { background: #1c2740; color: #9bb8ff; } :root:not([data-theme="light"]) .tag.price { background: #3a2f12; color: #f0c76a; } }
+:root[data-theme="dark"] .tag.local { background: #1c2740; color: #9bb8ff; }
+:root[data-theme="dark"] .tag.price { background: #3a2f12; color: #f0c76a; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="eyebrow">Free tool · Google Ads &amp; SEO</div>
+  <h1>Keyword Grouper</h1>
+  <p>Paste a messy keyword list and get tidy groups: one ad group or one SEO page per topic. Each keyword is labelled by search intent, and keywords that will waste ad money are flagged as negative keyword ideas. Works with English and Bahasa Malaysia searches.</p>
+</header>
+
+<div class="grid">
+  <section class="card" aria-labelledby="in-title">
+    <h2 id="in-title">Your keywords</h2>
+    <div class="field">
+      <label for="kws">One keyword per line <span class="hint" style="display:inline">– add search volume after a tab or comma if you have it</span></label>
+      <textarea id="kws" rows="16">aircon service pj, 1300
+aircon service near me, 2400
+aircon servicing price, 880
+aircon servis murah, 590
+servis aircon petaling jaya, 320
+aircon repair pj, 720
+aircon repair near me, 1600
+aircon not cold, 1000
+aircon leaking water, 480
+aircon chemical wash price, 590
+chemical wash aircon, 1300
+aircon gas top up price, 320
+aircon installation pj, 210
+pasang aircon harga, 390
+aircon technician job, 260
+how to clean aircon filter, 590
+aircon service diy, 70
+daikin aircon service centre, 880
+aircon service free inspection, 50</textarea>
+    </div>
+    <div class="field">
+      <label for="ignore">Words to ignore when grouping <span class="hint" style="display:inline">(brand, location, your core service)</span></label>
+      <div class="inputbox"><input id="ignore" type="text" value="aircon, pj, petaling jaya, near me"></div>
+      <span class="hint">These words appear in almost every keyword, so ignoring them gives more useful groups.</span>
+    </div>
+    <div class="field">
+      <label for="min">Smallest group size</label>
+      <div class="inputbox"><input id="min" type="number" min="1" max="10" value="2"><span>keywords</span></div>
+    </div>
+    <label class="check"><input type="checkbox" id="pullNeg" checked> Move negative keyword matches out of the groups</label>
+  </section>
+
+  <section class="card" aria-labelledby="out-title">
+    <h2 id="out-title">Groups</h2>
+    <div class="summary">
+      <div class="stat"><div class="k">Keywords</div><div class="v" id="sK">0</div></div>
+      <div class="stat"><div class="k">Groups</div><div class="v" id="sG">0</div></div>
+      <div class="stat"><div class="k">Monthly searches</div><div class="v" id="sV">–</div></div>
+    </div>
+    <p class="small">
+      <span class="tag buy">Service</span> ready to buy or book ·
+      <span class="tag price">Price</span> comparing cost ·
+      <span class="tag local">Local</span> wants someone nearby ·
+      <span class="tag info">Info</span> wants to learn – better for blog posts than ads
+    </p>
+    <div id="groups"></div>
+
+    <div class="block">
+      <h3>Negative keyword ideas</h3>
+      <p class="small" style="margin-top:0">Words in your list that usually bring clicks from people who will not buy. Check each one before adding it.</p>
+      <div class="negs" id="negs"></div>
+      <div class="actions"><button type="button" class="btn secondary" id="copyNeg">Copy negative keywords</button></div>
+    </div>
+
+    <div class="block">
+      <h3>Export</h3>
+      <div class="actions" style="margin-top:0">
+        <button type="button" class="btn" id="csv">Download CSV</button>
+        <button type="button" class="btn secondary" id="copy">Copy for Excel / Sheets</button>
+      </div>
+    </div>
+  </section>
+</div>
+
+<div class="content">
+  <section class="card">
+    <h2>How to use the groups</h2>
+    <h3>For Google Ads</h3>
+    <ul>
+      <li>Make one <strong>ad group</strong> per group, named after the group.</li>
+      <li>Write ads that repeat the group’s main words in the headlines.</li>
+      <li>Send each ad group to the most relevant page – the price group to your price list, the repair group to your repair page.</li>
+      <li>Keep <strong>Info</strong> keywords (“how to…”, “cara…”) out of ads at first. They are cheaper to win with blog posts.</li>
+      <li>Add the negative keywords at campaign level before you launch.</li>
+    </ul>
+    <h3>For SEO</h3>
+    <ul>
+      <li>Each group is usually <strong>one page</strong>. Don’t write five pages for five versions of the same search – they compete with each other.</li>
+      <li>Use the largest keyword in the page title and main heading, and cover the rest naturally in the content.</li>
+      <li>Turn <strong>Info</strong> groups into helpful articles that link to your service pages.</li>
+    </ul>
+  </section>
+
+  <section class="card">
+    <h2>Frequently asked questions</h2>
+    <h3>How does the grouping work?</h3>
+    <p>The tool finds the words that appear across many keywords (after ignoring filler words and the words you list), then puts each keyword in the group of its most common shared word. It is fast and transparent, but not perfect – read the groups and move the odd keyword by hand.</p>
+    <h3>Does it understand Malay?</h3>
+    <p>Yes for common search words. It treats <em>harga</em> and <em>murah</em> as price searches, <em>servis</em> like <em>service</em>, <em>cara</em> and <em>bagaimana</em> as “how to” searches, and <em>kerja</em> and <em>jawatan kosong</em> as job searches to exclude.</p>
+    <h3>Where do I get keywords?</h3>
+    <p>Google Ads Keyword Planner (free with a Google Ads account), Google Search Console for your own site, the “People also search for” box on Google, and the words customers use on WhatsApp.</p>
+    <h3>Are my keywords sent anywhere?</h3>
+    <p>No. The grouping runs in your browser.</p>
+  </section>
+
+  <section class="cta">
+    <h2>Want a Google Ads account built the right way from day one?</h2>
+    <p>ZenWeb is a digital marketing agency in Petaling Jaya, Malaysia. We research keywords in English, Malay and Chinese, structure campaigns, write the ads and build the landing pages – then report cost per enquiry every month.</p>
+    <div class="actions">
+      <a class="btn" href="https://zenweb.my/services/google-ads/?utm_source=keyword-grouper&amp;utm_medium=tool&amp;utm_campaign=free-tools">Google Ads management</a>
+      <a class="btn" href="https://zenweb.my/services/seo/?utm_source=keyword-grouper&amp;utm_medium=tool&amp;utm_campaign=free-tools">SEO services</a>
+    </div>
+  </section>
+</div>
+
+<footer>
+  Free tool by <a href="https://zenweb.my/?utm_source=keyword-grouper&amp;utm_medium=tool&amp;utm_campaign=free-tools">ZenWeb</a> (PNH Malaysia Sdn Bhd) ·
+  <a href="https://github.com/zenwebmalaysia/keyword-grouper">Source on GitHub</a> ·
+  Nothing you type is stored or sent anywhere.
+</footer>
+</div>
+
+<script>
+(function () {
+  'use strict';
+  var $ = function (id) { return document.getElementById(id); };
+
+  var STOP = ('a an the and or of for to in on at by with from my your our is are be can do does i me we you it this that best top good ' +
+    'dan atau di ke dari untuk yang dengan ini itu ada saya kami anda paling terbaik bagus').split(' ');
+  var SYN = { servis: 'service', servicing: 'service', services: 'service', perkhidmatan: 'service', baiki: 'repair', repairs: 'repair', repairing: 'repair',
+    pasang: 'installation', install: 'installation', installing: 'installation', harga: 'price', prices: 'price', cost: 'price', costs: 'price', murah: 'cheap',
+    pembersihan: 'cleaning', cuci: 'cleaning', clean: 'cleaning', kedai: 'shop', shops: 'shop' };
+  // modifier words: only used as a group when a keyword has no topic word
+  var MOD = {};
+  'price cheap cheapest promo promotion package pakej quote quotation rate fee near nearby berdekatan dekat best top review reviews vs how what why cara'.split(' ').forEach(function (w) { MOD[w] = 1; });
+  var NEG = [
+    [/\b(job|jobs|kerja|jawatan kosong|vacancy|vacancies|hiring|career|careers|salary|gaji|intern|internship)\b/i, 'jobs'],
+    [/\b(free|percuma)\b/i, 'free'],
+    [/\b(diy|sendiri)\b/i, 'diy'],
+    [/\b(course|courses|kursus|tutorial|pdf|ebook|syllabus)\b/i, 'learning'],
+    [/\b(second hand|secondhand|terpakai|used|scrap)\b/i, 'second-hand'],
+    [/\b(wikipedia|meaning|maksud|definition|logo|png|jpg|wallpaper)\b/i, 'research']
+  ];
+  var INTENT = [
+    ['info', /\b(how|why|what|when|which|cara|bagaimana|kenapa|mengapa|apa|tips|guide|panduan|not|tak|tidak|problem|masalah|leaking|bocor|vs)\b/i],
+    ['price', /\b(price|prices|cost|costs|harga|murah|cheap|cheapest|rate|rates|fee|fees|quotation|quote|package|pakej|promo|promotion|rm\d*)\b/i],
+    ['local', /\b(near me|nearby|berdekatan|dekat|kl|kuala lumpur|pj|petaling jaya|selangor|subang|shah alam|klang|puchong|cheras|johor|penang|ipoh|melaka|seremban|kuching|kota kinabalu)\b/i]
+  ];
+
+  function parse() {
+    var seen = {}, out = [];
+    $('kws').value.split('\n').forEach(function (line) {
+      line = line.trim(); if (!line) return;
+      var m = line.match(/^(.*?)[\t,;]\s*([\d.,\s]+)\s*$/), kw = line, vol = null;
+      if (m && /\d/.test(m[2])) { kw = m[1]; vol = parseInt(m[2].replace(/[^\d]/g, ''), 10); }
+      kw = kw.replace(/^["']|["']$/g, '').toLowerCase().replace(/\s+/g, ' ').trim();
+      if (!kw || /^keyword$/i.test(kw) || seen[kw]) return;
+      seen[kw] = 1; out.push({ kw: kw, vol: isFinite(vol) ? vol : null });
+    });
+    return out;
+  }
+
+  function tokens(kw, ignoreWords, ignorePhrases) {
+    var s = ' ' + kw + ' ';
+    ignorePhrases.forEach(function (p) { s = s.split(' ' + p + ' ').join(' '); });
+    return s.trim().split(/\s+/).filter(Boolean).map(function (w) {
+      w = SYN[w] || w;
+      if (w.length > 4 && /s$/.test(w) && !/ss$/.test(w)) w = w.slice(0, -1);
+      return SYN[w] || w;
+    }).filter(function (w) { return STOP.indexOf(w) < 0 && ignoreWords.indexOf(w) < 0 && !/^\d+$/.test(w) && w.length > 1; });
+  }
+
+  function intent(kw) {
+    for (var i = 0; i < INTENT.length; i++) if (INTENT[i][1].test(kw)) return INTENT[i][0];
+    return 'buy';
+  }
+  function negOf(kw) { for (var i = 0; i < NEG.length; i++) { var m = kw.match(NEG[i][0]); if (m) return m[0].toLowerCase(); } return null; }
+
+  function title(w) { return w.charAt(0).toUpperCase() + w.slice(1); }
+  function fmt(n) { return n == null ? '' : n.toLocaleString('en-MY'); }
+  function esc(s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
+
+  var result = { groups: [], negs: [] };
+
+  function run() {
+    var items = parse();
+    var ig = $('ignore').value.toLowerCase().split(',').map(function (s) { return s.trim(); }).filter(Boolean);
+    var igPhrases = ig.filter(function (s) { return s.indexOf(' ') > -1; }).sort(function (a, b) { return b.length - a.length; });
+    var igWords = ig.filter(function (s) { return s.indexOf(' ') < 0; }).map(function (w) { return SYN[w] || w; });
+    var minSize = Math.max(1, parseInt($('min').value, 10) || 2);
+    var pull = $('pullNeg').checked, negs = {}, pool = [];
+
+    items.forEach(function (it) {
+      it.intent = intent(it.kw); it.neg = negOf(it.kw);
+      it.tok = tokens(it.kw, igWords, igPhrases);
+      if (it.neg) negs[it.neg] = (negs[it.neg] || []).concat(it.kw);
+      if (!(pull && it.neg)) pool.push(it);
+    });
+
+    // word frequency across the pool (count each word once per keyword)
+    var freq = {};
+    pool.forEach(function (it) { it.tok.filter(function (w, i, a) { return a.indexOf(w) === i; }).forEach(function (w) { freq[w] = (freq[w] || 0) + 1; }); });
+
+    // iterative assignment: biggest shared word first
+    var groups = {}, left = pool.slice();
+    while (left.length) {
+      var f = {};
+      left.forEach(function (it) { it.tok.filter(function (w, i, a) { return a.indexOf(w) === i; }).forEach(function (w) { f[w] = (f[w] || 0) + 1; }); });
+      var cands = Object.keys(f).filter(function (w) { return f[w] >= minSize; });
+      var best = cands.sort(function (a, b) { return (MOD[a] ? 1 : 0) - (MOD[b] ? 1 : 0) || f[b] - f[a] || freq[b] - freq[a] || b.length - a.length; })[0];
+      if (!best) break;
+      groups[best] = left.filter(function (it) { return it.tok.indexOf(best) > -1; });
+      left = left.filter(function (it) { return it.tok.indexOf(best) < 0; });
+    }
+    var list = Object.keys(groups).map(function (k) {
+      // name the group with every word shared by all its keywords, e.g. "Chemical wash"
+      var its = groups[k], first = its[0].tok;
+      var shared = first.filter(function (w, i) { return first.indexOf(w) === i && !MOD[w] && its.every(function (it) { return it.tok.indexOf(w) > -1; }); });
+      if (shared.indexOf(k) < 0) shared = [k];
+      return { name: title(shared.slice(0, 3).join(' ')), items: its };
+    });
+    if (left.length) list.push({ name: 'Other', items: left, other: true });
+    list.forEach(function (g) {
+      g.items.sort(function (a, b) { return (b.vol || 0) - (a.vol || 0) || a.kw.localeCompare(b.kw); });
+      g.vol = g.items.some(function (i) { return i.vol != null; }) ? g.items.reduce(function (s, i) { return s + (i.vol || 0); }, 0) : null;
+      var info = g.items.filter(function (i) { return i.intent === 'info'; }).length;
+      g.mostlyInfo = info / g.items.length > 0.5;
+    });
+    list.sort(function (a, b) { return (a.other ? 1 : 0) - (b.other ? 1 : 0) || (b.vol || 0) - (a.vol || 0) || b.items.length - a.items.length; });
+    result = { groups: list, negs: Object.keys(negs).map(function (k) { return { word: k, kws: negs[k] }; }) };
+
+    var total = items.reduce(function (s, i) { return s + (i.vol || 0); }, 0), hasVol = items.some(function (i) { return i.vol != null; });
+    $('sK').textContent = items.length; $('sG').textContent = list.filter(function (g) { return !g.other; }).length; $('sV').textContent = hasVol ? fmt(total) : '–';
+
+    var TAG = { buy: 'Service', price: 'Price', local: 'Local', info: 'Info' };
+    $('groups').innerHTML = list.length ? list.map(function (g, gi) {
+      return '<details class="grp"' + (gi < 6 ? ' open' : '') + '><summary><b>' + esc(g.name) + (g.mostlyInfo ? ' <span class="tag info">Blog topic</span>' : '') + '</b>' +
+        '<span>' + g.items.length + ' keyword' + (g.items.length > 1 ? 's' : '') + (g.vol != null ? ' · ' + fmt(g.vol) + '/mo' : '') + '</span></summary><ul>' +
+        g.items.map(function (i) {
+          return '<li><span>' + esc(i.kw) + '<span class="tag ' + i.intent + '">' + TAG[i.intent] + '</span>' + (i.neg ? '<span class="tag neg">Negative?</span>' : '') + '</span><em>' + fmt(i.vol) + '</em></li>';
+        }).join('') + '</ul></details>';
+    }).join('') : '<p class="small">Paste some keywords to start.</p>';
+
+    $('negs').innerHTML = result.negs.length ? result.negs.map(function (n) {
+      return '<code title="' + esc(n.kws.join(', ')) + '">' + esc(n.word) + '</code>';
+    }).join('') + '<span class="small">Found in: ' + esc(result.negs.map(function (n) { return n.kws.join(', '); }).join('; ')) + '</span>'
+      : '<span class="small">None found in this list. Common ones to consider: free, percuma, job, kerja, diy, course, pdf.</span>';
+  }
+
+  function rows() {
+    var r = [['Group', 'Keyword', 'Monthly searches', 'Intent', 'Negative?']];
+    result.groups.forEach(function (g) { g.items.forEach(function (i) { r.push([g.name, i.kw, i.vol == null ? '' : i.vol, i.intent, i.neg ? 'yes' : '']); }); });
+    if ($('pullNeg').checked) result.negs.forEach(function (n) { n.kws.forEach(function (k) { r.push(['Negative: ' + n.word, k, '', '', 'yes']); }); });
+    return r;
+  }
+  function copy(text, btn) {
+    var done = function () { var t = btn.textContent; btn.textContent = 'Copied ✓'; setTimeout(function () { btn.textContent = t; }, 1500); };
+    if (navigator.clipboard && window.isSecureContext) navigator.clipboard.writeText(text).then(done, fallback); else fallback();
+    function fallback() {
+      var ta = document.createElement('textarea'); ta.value = text; ta.style.position = 'fixed'; ta.style.opacity = '0';
+      document.body.appendChild(ta); ta.select();
+      try { document.execCommand('copy'); done(); } catch (e) {}
+      document.body.removeChild(ta);
+    }
+  }
+  $('copy').addEventListener('click', function () { copy(rows().map(function (r) { return r.join('\t'); }).join('\n'), this); });
+  $('copyNeg').addEventListener('click', function () { copy(result.negs.map(function (n) { return n.word; }).join('\n'), this); });
+  $('csv').addEventListener('click', function () {
+    var csv = '﻿' + rows().map(function (r) { return r.map(function (c) { c = String(c); return /[",\n]/.test(c) ? '"' + c.replace(/"/g, '""') + '"' : c; }).join(','); }).join('\r\n');
+    var a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([csv], { type: 'text/csv' })); a.download = 'keyword-groups.csv';
+    document.body.appendChild(a); a.click(); document.body.removeChild(a); setTimeout(function () { URL.revokeObjectURL(a.href); }, 2000);
+  });
+
+  var t;
+  document.querySelector('.grid').addEventListener('input', function () { clearTimeout(t); t = setTimeout(run, 200); });
+  $('pullNeg').addEventListener('change', run);
+  run();
+})();
+</script>
+</body>
+</html>
